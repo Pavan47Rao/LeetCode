@@ -83,4 +83,47 @@ public class FindFirstAndLastPosOfElInSortedArray {
             return findFirstAndLastIndex(index, target, nums, result);
         }
     }
+
+    /** Simpler approach: 2 binary search*/
+    public int[] searchRange2(int[] nums, int target) {
+        
+        int low = 0, high = nums.length-1;
+        int leastIndex = -1, highestIndex = -1;
+        int[] result = {-1, -1};
+        
+        while(low <= high) {
+            int mid = (low+high)/2;
+            if(nums[mid] == target) {
+                leastIndex = mid;
+                high = mid-1;
+            }
+            else if(nums[mid] > target) {
+                high = mid-1;
+            }
+            else {
+                low = mid+1;
+            }
+        }
+        result[0] = leastIndex;
+        
+        low = 0; 
+        high = nums.length-1;
+        while(low <= high) {
+            int mid = (low+high)/2;
+            if(nums[mid] == target) {
+                highestIndex = mid;
+                low = mid+1;
+            }
+            else if(nums[mid] > target) {
+                high = mid-1;
+            }
+            else {
+                low = mid+1;
+            }
+        }
+        result[1] = highestIndex;
+        
+        return result;
+    }
 }
+

@@ -37,12 +37,12 @@ public class PerimeterofTree {
             return;
   
         if (node.left != null) {
-            lstack.push(node.val);
             pushLeftBoundaryToStack(node.left);
+            System.out.print(node.val+" ");
         }
         else if (node.right != null) {
-            lstack.push(node.val);
             pushLeftBoundaryToStack(node.right);
+            System.out.print(node.val+" ");
         }
     }
   
@@ -52,12 +52,12 @@ public class PerimeterofTree {
             return;
   
         if (node.right != null) {
+            System.out.print(node.val+" ");
             pushRightBoundaryToStack(node.right);
-            rstack.push(node.val);
         }
         else if (node.left != null) {
+            System.out.print(node.val+" ");
             pushRightBoundaryToStack(node.left);
-            rstack.push(node.val);
         }        
     }
   
@@ -69,17 +69,11 @@ public class PerimeterofTree {
         System.out.print(root.val + " ");
   
         pushRightBoundaryToStack(root.right);
-        while(!rstack.isEmpty()) {
-            System.out.print(rstack.pop() + " ");
-        }
 
         printLeaves(root.right);
         printLeaves(root.left);
         
         pushLeftBoundaryToStack(root.left);
-        while(!lstack.isEmpty()) {
-            System.out.print(lstack.pop() + " ");
-        }
     }
   
     TreeNode root;

@@ -44,27 +44,114 @@ At most 3 * 104 calls will be made to get and put.
 package Medium;
 import java.util.*;
 
-public class LRUCache extends LinkedHashMap<Integer,Integer>{
+// public class LRUCache extends LinkedHashMap<Integer,Integer>{
 
+//     private int capacity;
+//     public LRUCache(int capacity) {
+//         super(capacity, 0.75F, true);
+//         this.capacity = capacity;
+//     }
+    
+//     public int get(int key) {
+//         return super.getOrDefault(key, -1);
+//     }
+    
+//     public void put(int key, int value) {
+//         super.put(key, value);
+//     }
+    
+//     @Override
+//     public boolean removeEldestEntry(Map.Entry<Integer,Integer> eldest) {
+//         return size() > capacity;
+//     }
+// }
+
+class LRUCache {
+
+    class DLinkedNode{
+        int key;
+        int value;
+        DLinkedNode prev;
+        DLinkedNode next;
+    }
+    
+    private Map<Integer, DLinkedNode> cache = new HashMap<>();
+    private int size;
     private int capacity;
+    private DLinkedNode head, tail;
+    
     public LRUCache(int capacity) {
-        super(capacity, 0.75F, true);
+        this.size = 0;
         this.capacity = capacity;
+        
+        head = new DLinkedNode();
+        tail = new DLinkedNode();
+        head.next = tail;
+        tail.prev = head;
     }
     
     public int get(int key) {
-        return super.getOrDefault(key, -1);
+        DLinkedNode node = cache.get(key);
+        if(node == null)
+            return -1;
+        moveToHead(node);
+        return node.value;
+    }
+    
+    public void moveToHead(DLinkedNode node) {
+        removeNode(node);
+        addNode(node);
+    }
+    
+    public void addNode(DLinkedNode node) {
+        node.next = head.next;
+        node.prev = head;
+        head.next.prev = node;
+        head.next = node;
+    }
+    
+    public void removeNode(DLinkedNode node) {
+        DLinkedNode prev = node.prev;
+        DLinkedNode next = node.next;
+        prev.next = next;
+        next.prev = prev;
+    }
+    
+    public DLinkedNode popTail() {
+        DLinkedNode res = tail.prev;
+        removeNode(res);
+        return res;
     }
     
     public void put(int key, int value) {
-        super.put(key, value);
-    }
-    
-    @Override
-    public boolean removeEldestEntry(Map.Entry<Integer,Integer> eldest) {
-        return size() > capacity;
+        DLinkedNode node = cache.get(key);
+        if(node == null) {
+            DLinkedNode newNode = new DLinkedNode();
+            newNode.key = key;
+            newNode.value = value;
+            cache.put(key, newNode);
+            addNode(newNode);
+            
+            ++size;
+            if(size > capacity) {
+                DLinkedNode tail = popTail();
+                cache.remove(tail.key);
+                --size;
+            }
+        }
+        else {
+            node.value = value;
+            moveToHead(node);
+        }
     }
 }
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
 
 /**
  * Your LRUCache object will be instantiated and called as such:

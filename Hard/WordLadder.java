@@ -37,7 +37,7 @@ package Hard;
 import java.util.*;
 
 public class WordLadder {
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> words = new HashSet<>(wordList);
         Queue<String> queue = new LinkedList<>();
         queue.add(beginWord);
@@ -64,5 +64,13 @@ public class WordLadder {
             count++;
         }
         return 0;
+    }
+
+    public static void main(String args[]) {
+        String beginWord = "hit";
+        String endWord = "cog";
+        String[] words = {"hot","dot","dog","lot","log","cog"};
+        List<String> wordList = new ArrayList<>(Arrays.asList(words));
+        System.out.println("Number of words in the shortest transformation sequence from beginWord to endWord is " + ladderLength(beginWord, endWord, wordList));
     }
 }

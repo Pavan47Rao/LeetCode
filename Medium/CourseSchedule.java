@@ -33,7 +33,7 @@ package Medium;
 import java.util.*;
 
 public class CourseSchedule {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, List<Integer>> dict = new HashMap<>();
         int[] indegree = new int[numCourses];
         for(int[] prereq: prerequisites) {
@@ -65,5 +65,14 @@ public class CourseSchedule {
             }
         }
         return count == numCourses;
+      }
+
+      public static void main(String[] args) {
+        int numCourses = 2;
+        int[][] prerequisites = {{1,0},{0,1}};
+        if(canFinish(numCourses, prerequisites))
+            System.out.println("Courses can be finished!");
+        else
+            System.out.println("Courses can't be finished!");
       }
 }

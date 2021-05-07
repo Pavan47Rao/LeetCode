@@ -55,3 +55,26 @@ public class MinDepthOfBinaryTree {
         return findDepth(root);
     }
 }
+
+/**
+public int minDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int minDepth = 0;
+        while(!queue.isEmpty()) {
+            minDepth++;
+            int level_size = queue.size();
+            for(int i = 0; i < level_size; i++) {
+                TreeNode node = queue.poll();
+                if(node.left == null && node.right == null)
+                    return minDepth;
+                if(node.left != null)
+                    queue.add(node.left);
+                if(node.right != null)
+                    queue.add(node.right);
+            }
+        }
+        return minDepth;
+    } */

@@ -61,3 +61,22 @@ public class MaximumPointsFromCards {
         return maxSum;
     }
 }
+
+/**
+DP + Sliding window approach
+    public int maxScore(int[] cardPoints, int k) {
+        int n = cardPoints.length;
+        int[] frontSet = new int[k+1];
+        int[] backSet = new int[k+1];
+        for(int i = 0; i < k; i++) {
+            frontSet[i+1] = frontSet[i] + cardPoints[i];
+            backSet[i+1] = backSet[i] + cardPoints[n-i-1];
+        }
+        int maxScore = 0;
+        for(int i = 0; i <= k; i++) {
+            int currentScore = frontSet[i] + backSet[k-i];
+            maxScore = Math.max(currentScore, maxScore);
+        }
+        return maxScore;
+    }
+ */

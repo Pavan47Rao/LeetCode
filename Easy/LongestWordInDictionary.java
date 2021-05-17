@@ -69,7 +69,7 @@ class Trie {
                     stack.push(node);
             }
         }
-        return result;
+        return ans;
     }
 }
 

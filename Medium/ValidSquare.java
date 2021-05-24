@@ -27,6 +27,8 @@ p1.length == p2.length == p3.length == p4.length == 2
 -104 <= xi, yi <= 104
  */
 
+package Medium;
+
 public class ValidSquare {
     public int dist(int[] p1, int[] p2) {
         return (p2[1] - p1[1]) * (p2[1] - p1[1]) + (p2[0] - p1[0]) * (p2[0] - p1[0]);

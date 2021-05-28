@@ -76,4 +76,8 @@ for(int house = 1; house < n; house++) {
             costs[house][color] += costs[house-1][minColor];
     }
 }
+int minPrice = Integer.MAX_VALUE;
+for(int c: costs[n-1])
+    minPrice = Math.min(minPrice, c);
+return minPrice;
  */

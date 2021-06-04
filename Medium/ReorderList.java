@@ -48,3 +48,38 @@ public class ReorderList {
         head.next = temp.next;
     }
 }
+
+/**
+Second approach: find mid, reverse second half, merge
+
+public void reorderList(ListNode head) {
+        
+        if(head == null)
+            return;
+        
+        ListNode fast = head, slow = head;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        
+        ListNode prev = null, cur = slow, tmp;
+        while(cur != null) {
+            tmp = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = tmp;
+        }
+        
+        ListNode first = head, second = prev;
+        while(second.next != null) {
+            tmp = first.next;
+            first.next = second;
+            first = tmp;
+            
+            tmp = second.next;
+            second.next = first;
+            second = tmp;
+        }
+    }
+ */

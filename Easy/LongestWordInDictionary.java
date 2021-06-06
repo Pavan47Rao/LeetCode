@@ -62,7 +62,7 @@ class Trie {
             if(node == root || node.end > 0) {
                 if(node != root) {
                     String word = words[node.end-1];
-                    if(word.length() > ans.length() || word.length() == ans.length() && word.compareTo(ans < 0))
+                    if(word.length() > ans.length() || word.length() == ans.length() && word.compareTo(ans) < 0)
                         ans = word;
                 }
                 for(Node nei: node.children.values())

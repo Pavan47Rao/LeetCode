@@ -53,3 +53,24 @@ public class BinaryTreeInorderTraversal {
         return result;
     }
 }
+
+/**
+ * Recursive approach:
+ * 
+ * public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if(root == null)
+            return result;
+        inOrderTraversal(root, result);
+        return result;
+    }
+    
+    public void inOrderTraversal(TreeNode root, List<Integer> result) {
+        if(root.left != null)
+            inOrderTraversal(root.left, result);
+        result.add(root.val);
+        if(root.right != null)
+            inOrderTraversal(root.right, result);
+    }
+ * 
+ */

@@ -33,7 +33,7 @@ public class DiagonalTraverse {
         int[] result = new int[M*N];
         result[0] = mat[0][0];
         while(k < M*N) {
-            //move up left
+            //move up right
             while(i >= 1 && j < N-1) {
                 i--;
                 j++;

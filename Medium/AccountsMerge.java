@@ -59,12 +59,11 @@ public class AccountsMerge {
 			
 			if( ! visited.contains(email)) {
 				final List<String> list = new ArrayList<>();
-				list.add(map.get(email).name);
-				
 				dfs(map, visited, list, email);
 				
 				/* sort the list */
 				Collections.sort(list);
+				list.add(0, map.get(email).name);
 				results.add(list);
 			}
 		}

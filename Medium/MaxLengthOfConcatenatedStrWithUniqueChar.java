@@ -71,3 +71,34 @@ public class MaxLengthOfConcatenatedStrWithUniqueChar {
         return true;
     }
 }
+
+/**
+ * DFS approach
+ * 
+ * int maxLength;
+    
+    public int maxLength(List<String> arr) {
+        for(int i = 0; i < arr.size(); i++) {
+            if(isUnique(arr.get(i)))
+                dfs(arr, i, arr.get(i));
+        }
+        return maxLength;
+    }
+    
+    public void dfs(List<String> arr, int index, String newWord) {
+        for(int i = index+1; i < arr.size(); i++) {
+            if(isUnique(newWord+arr.get(i)))
+                dfs(arr, i, newWord+arr.get(i));
+        }
+        maxLength = Math.max(maxLength, newWord.length());
+    }
+    
+    public boolean isUnique(String word) {
+        int[] count = new int[26];
+        for(char ch: word.toCharArray())
+            if(++count[ch-'a'] > 1)
+                return false;
+        return true;
+    }
+ * 
+ */

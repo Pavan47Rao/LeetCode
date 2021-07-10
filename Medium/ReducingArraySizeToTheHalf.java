@@ -58,4 +58,4 @@ public class ReducingArraySizeToTheHalf {
         }
         return setSize;
     }    
-} 
+}

@@ -19,7 +19,7 @@ Constraints:
 
 1 <= s.length <= 104
 s consists of only English letters and spaces ' '.
- */
+*/
 
 public class LengthOfLastWord {
     public int lengthOfLastWord(String s) {

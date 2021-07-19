@@ -58,3 +58,5 @@ public class StudentAttendanceRecord1 {
         return true;
     }
 }
+
+// 1 line regex solution: !s.matches(".*(A.*A|LLL).*");

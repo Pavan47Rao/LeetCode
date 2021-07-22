@@ -67,6 +67,7 @@ public int lengthOfLongestSubstring(String str) {
           if (charIndexMap.containsKey(rightChar)) {
             // this is tricky; in the current window, we will not have any 'rightChar' after its previous index
             // and if 'windowStart' is already ahead of the last index of 'rightChar', we'll keep 'windowStart'
+            // eg test case to understand usage of max: abba 
             windowStart = Math.max(windowStart, charIndexMap.get(rightChar) + 1);
           }
           charIndexMap.put(rightChar, windowEnd); // insert the 'rightChar' into the map

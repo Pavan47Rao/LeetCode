@@ -39,15 +39,19 @@ package Medium;
 public class NextPermutation {
     public void nextPermutation(int[] nums) {
         int i = nums.length-2;
+        // find first decreasing element
         while(i>=0 && nums[i+1]<=nums[i]) {
             i--;
         }
         if(i>=0) {
             int j = nums.length-1;
+            // find an element which is next highest number
             while(j>=0 && nums[j]<=nums[i])
                 j--;
+            // swap the two numbers
             swap(nums, i, j);
         }
+        // reverse the array
         reverse(nums, i+1);
     }
     

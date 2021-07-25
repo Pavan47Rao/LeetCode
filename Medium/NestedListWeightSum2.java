@@ -1,9 +1,11 @@
 /**
  * You are given a nested list of integers nestedList. Each element is either an integer or a list whose elements may also be integers or other lists.
 
-The depth of an integer is the number of lists that it is inside of. For example, the nested list [1,[2,2],[[3],2],1] has each integer's value set to its depth.
+The depth of an integer is the number of lists that it is inside of. For example, the nested list [1,[2,2],[[3],2],1] has each integer's value set to its depth. Let maxDepth be the maximum depth of any integer.
 
-Return the sum of each integer in nestedList multiplied by its depth.
+The weight of an integer is maxDepth - (the depth of the integer) + 1.
+
+Return the sum of each integer in nestedList multiplied by its weight.
 
  
 
@@ -11,18 +13,16 @@ Example 1:
 
 
 Input: nestedList = [[1,1],2,[1,1]]
-Output: 10
-Explanation: Four 1's at depth 2, one 2 at depth 1. 1*2 + 1*2 + 2*1 + 1*2 + 1*2 = 10.
+Output: 8
+Explanation: Four 1's with a weight of 1, one 2 with a weight of 2.
+1*1 + 1*1 + 2*2 + 1*1 + 1*1 = 8
 Example 2:
 
 
 Input: nestedList = [1,[4,[6]]]
-Output: 27
-Explanation: One 1 at depth 1, one 4 at depth 2, and one 6 at depth 3. 1*1 + 4*2 + 6*3 = 27.
-Example 3:
-
-Input: nestedList = [0]
-Output: 0
+Output: 17
+Explanation: One 1 at depth 3, one 4 at depth 2, and one 6 at depth 1.
+1*3 + 4*2 + 6*1 = 17
  
 
 Constraints:
@@ -34,6 +34,7 @@ The maximum depth of any integer is less than or equal to 50.
 
 package Medium;
 import java.util.*;
+
 /**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
@@ -63,21 +64,35 @@ import java.util.*;
  * }
  */
 
-public class NestedListWeightSum1 {
-    public int depthSum(List<NestedInteger> nestedList) {
-        return dfs(nestedList, 1);
-    }
+public class NestedListWeightSum2 {
+    int maxDepth;
     
-    public int dfs(List<NestedInteger> nestedList, int depth) {
-        int total = 0;
-        for(NestedInteger nested: nestedList) {
-            if(nested.isInteger()) {
-                total += nested.getInteger() * depth;
-            }
-            else {
-                total += dfs(nested.getList(), depth+1);
+    public void findMaxDepth(List<NestedInteger> list, int curDepth) {
+        for(NestedInteger ni: list) {
+            if(ni.isInteger()) {
+                if(curDepth > maxDepth)
+                    maxDepth = curDepth;
+            } else {
+                findMaxDepth(ni.getList(), curDepth+1);
             }
         }
-        return total;
     }
+    
+    public int depthSumInverse(List<NestedInteger> nestedList) {
+        maxDepth = 0;
+        findMaxDepth(nestedList, 1);
+        return findDepthSum(nestedList, 1);
+    }
+    
+    public int findDepthSum(List<NestedInteger> list, int depth) {
+        int sum = 0;
+        for(NestedInteger ni: list) {
+            if(ni.isInteger()) {
+                sum += ni.getInteger() * (maxDepth - depth + 1);
+            } else {
+                sum += findDepthSum(ni.getList(), depth+1);
+            }
+        }
+        return sum;
+    }   
 }
